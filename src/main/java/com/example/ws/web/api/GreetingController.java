@@ -2,9 +2,9 @@ package com.example.ws.web.api;
 
 import java.math.BigInteger;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.ws.model.Greeting;
 import com.example.ws.serevice.GreetingService;
@@ -24,9 +25,10 @@ public class GreetingController {
 
     @Autowired
     private GreetingService greetingService;
+    
 
     // informs spring that this method should receive http request
-    @RequestMapping(value = "/*", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
+    @RequestMapping(value = "/greetings", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
     public ResponseEntity<Collection<Greeting>> getGreetings() {
 	
 	Collection<Greeting> greetings= greetingService.findAll();
